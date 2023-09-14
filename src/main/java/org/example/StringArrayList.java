@@ -11,13 +11,14 @@ public class StringArrayList implements StringList {
     private String[] EMPTY_STRING_DATA = {};
     private String[] stringData;
     private int DEFAULT_CAPACITY = 10;
-    private int size = stringData.length;
+    private int size;
 
 
     public StringArrayList(String item) {
         isNullString(item);
         this.stringData = new String[1];
         stringData[0] = item;
+        size = stringData.length;
     }
 
 //    public StringArrayList(int initialValue){
@@ -29,16 +30,11 @@ public class StringArrayList implements StringList {
         size = basedArray.length;
     }
 
-    private String[] grow() {
-        size++;
-        return stringData = Arrays.copyOf(stringData, size);
-
-    }
 
     @Override
     public String add(String item) {
         isNullString(item);
-        stringData = grow();
+        grow();
         String[] curData = stringData;
         System.arraycopy(curData, 0, stringData, 0, size);
         stringData[size - 1] = item;
@@ -49,9 +45,13 @@ public class StringArrayList implements StringList {
     public String add(int index, String item) {
         isNullString(item);
         indexChecker(index);
-        stringData = grow();
         String[] curData = this.stringData;
-        System.arraycopy(curData, index, stringData, index + 1, size - index);
+        grow();
+        System.arraycopy(curData, index, stringData, index + 1, curData.length - index);
+//        String[] leftSide = Arrays.copyOf(stringData, index);
+
+//        System.arraycopy(leftSide, 0, tempData, 0, leftSide.length);
+//        System.arraycopy(stringData, index + 1, tempData, index, ((size - index) - 1));
         stringData[index] = item;
         return item;
     }
@@ -80,7 +80,7 @@ public class StringArrayList implements StringList {
         }
         if (isContains) {
             remove(index);
-        } else{
+        } else {
             throw new WrongSearchingArgumentException("No such element in the list");
         }
         return item;
@@ -104,6 +104,7 @@ public class StringArrayList implements StringList {
             System.arraycopy(stringData, index + 1, tempData, index, ((size - index) - 1));
         }
         stringData = tempData;
+        size--;
         return item;
     }
 
@@ -165,7 +166,7 @@ public class StringArrayList implements StringList {
 
     @Override
     public boolean equals(StringList otherList) {
-        if(otherList == null){
+        if (otherList == null) {
             throw new NullStringArrayException();
         }
         if (size() != otherList.size()) {
@@ -211,5 +212,12 @@ public class StringArrayList implements StringList {
     private void isNullString(String item) {
         if (item == null) throw new NullStringDataException();
     }
+
+    private void grow() {
+        size++;
+        stringData = Arrays.copyOf(stringData, size);
+
+    }
+
 
 }
