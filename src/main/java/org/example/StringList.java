@@ -15,7 +15,7 @@ public interface StringList {
 
     int indexOf(String item);
 
-    int lastIndexOf(String id);
+    int lastIndexOf(String item);
 
     String get(int index);
 
