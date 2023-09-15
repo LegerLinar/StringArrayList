@@ -1,4 +1,4 @@
-package org.example;
+package org.example.StringList;
 
 public interface StringList {
     String add(String item);

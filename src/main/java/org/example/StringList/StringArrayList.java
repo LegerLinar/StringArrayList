@@ -1,4 +1,4 @@
-package org.example;
+package org.example.StringList;
 
 import org.example.exceptions.IndexOutOfStringArrayException;
 import org.example.exceptions.NullStringArrayException;
@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class StringArrayList implements StringList {
     private String[] EMPTY_STRING_DATA = {};
-    private String[] stringData;
+    private String[] stringData ={};
     private int DEFAULT_CAPACITY = 10;
     private int size;
 
@@ -26,7 +26,8 @@ public class StringArrayList implements StringList {
 //    }
 
     public StringArrayList(String[] basedArray) {
-        System.arraycopy(basedArray, 0, stringData, 0, basedArray.length);
+        if(basedArray == null) throw new NullStringArrayException();
+        stringData = Arrays.copyOf(basedArray, basedArray.length);
         size = basedArray.length;
     }
 
@@ -206,7 +207,7 @@ public class StringArrayList implements StringList {
     }
 
     private void indexChecker(int index) {
-        if (index > stringData.length || index < 0) throw new IndexOutOfStringArrayException();
+        if (index >= stringData.length || index < 0) throw new IndexOutOfStringArrayException();
     }
 
     private void isNullString(String item) {
