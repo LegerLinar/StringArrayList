@@ -102,14 +102,7 @@ public class IntegerArrayList implements IntegerList {
 
     @Override
     public boolean contains(Integer item) {
-        boolean isContains = false;
-        for (Integer integerElement : integerData) {
-            if (integerElement.equals(item)) {
-                isContains = true;
-                break;
-            }
-        }
-        return isContains;
+       return binarySearch(integerData, item);
     }
 
     @Override
@@ -194,11 +187,16 @@ public class IntegerArrayList implements IntegerList {
         return arrayOfInteger;
     }
 
+    @Override
+    public void sort(){
+        selectiveSort(integerData);
+    }
+
     private void indexChecker(int index) {
         if (index >= integerData.length || index < 0) throw new IndexOutOfStringArrayException();
     }
 
-    private void isNullInteger(String item) {
+    private void isNullInteger(Integer item) {
         if (item == null) throw new NullStringDataException();
     }
 
@@ -206,5 +204,43 @@ public class IntegerArrayList implements IntegerList {
         size++;
         integerData = Arrays.copyOf(integerData, size);
 
+    }
+
+    private void selectiveSort(Integer[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int minElIndex = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[minElIndex]) {
+                    minElIndex = j;
+                }
+            }
+            swapElements(arr, i, minElIndex);
+        }
+    }
+
+    private void swapElements(Integer[] arr, int indexA, int indexB) {
+        int temp = arr[indexA];
+        arr[indexA] = arr[indexB];
+        arr[indexB] = temp;
+
+    }
+
+    private boolean binarySearch(Integer[] arr, int e) {
+        int min = 0;
+        int max = arr.length - 1;
+
+        while (min <= max) {
+            int mid = min + max / 2;
+            if (e == arr[mid]) {
+                return true;
+            }
+            if (e < arr[mid]) {
+                max = mid - 1;
+            }
+            if (e > arr[mid]) {
+                min = mid + 1;
+            }
+        }
+        return false;
     }
 }
