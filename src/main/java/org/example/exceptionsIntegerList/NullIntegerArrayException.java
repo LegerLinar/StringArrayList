@@ -1,4 +1,7 @@
 package org.example.exceptionsIntegerList;
 
-public class NullIntegerArrayException {
+public class NullIntegerArrayException extends IllegalArgumentException{
+    public NullIntegerArrayException() {
+        super();
+    }
 }
