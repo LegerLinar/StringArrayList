@@ -1,4 +1,4 @@
-package org.example.exceptions;
+package org.example.exceptionsStringList;
 
 /**
  * Causing by searching not-existing element into StringArray

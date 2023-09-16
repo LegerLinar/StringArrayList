@@ -1,10 +1,9 @@
 import org.example.StringList.StringArrayList;
 import org.example.StringList.StringList;
-import org.example.exceptions.IndexOutOfStringArrayException;
-import org.example.exceptions.NullStringArrayException;
-import org.example.exceptions.NullStringDataException;
-import org.example.exceptions.WrongSearchingArgumentException;
-import org.junit.jupiter.api.Assertions;
+import org.example.exceptionsStringList.IndexOutOfStringArrayException;
+import org.example.exceptionsStringList.NullStringArrayException;
+import org.example.exceptionsStringList.NullStringDataException;
+import org.example.exceptionsStringList.WrongSearchingArgumentException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package org.example.exceptions;
+package org.example.exceptionsStringList;
 
 /**
  * Caused by using null-array as argument

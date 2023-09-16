@@ -1,4 +1,4 @@
-package org.example.exceptions;
+package org.example.exceptionsStringList;
 
 public class NullStringDataException extends IllegalArgumentException{
     public NullStringDataException(){
