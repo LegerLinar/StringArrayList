@@ -28,7 +28,7 @@ public class StringArrayList implements StringList {
     public StringArrayList(String[] basedArray) {
         if(basedArray == null) throw new NullStringArrayException();
         stringData = Arrays.copyOf(basedArray, basedArray.length);
-        size = basedArray.length;
+        size = stringData.length;
     }
 
 
