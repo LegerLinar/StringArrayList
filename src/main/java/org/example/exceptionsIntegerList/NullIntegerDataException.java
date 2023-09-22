@@ -1,4 +1,7 @@
 package org.example.exceptionsIntegerList;
 
-public class NullIntegerDataException {
+public class NullIntegerDataException extends IllegalArgumentException {
+    public NullIntegerDataException() {
+        super();
+    }
 }

@@ -32,4 +32,6 @@ public interface IntegerList {
 
     Integer[] toArray();
 
+    void sort(Integer[] arr);
+
 }
