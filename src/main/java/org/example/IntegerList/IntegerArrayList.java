@@ -1,5 +1,6 @@
 package org.example.IntegerList;
 
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.example.StringList.StringList;
 import org.example.exceptionsIntegerList.NullIntegerArrayException;
 import org.example.exceptionsStringList.IndexOutOfStringArrayException;
@@ -102,7 +103,9 @@ public class IntegerArrayList implements IntegerList {
 
     @Override
     public boolean contains(Integer item) {
-       return binarySearch(integerData, item);
+        Integer[] tempArray = Arrays.copyOf(integerData, integerData.length);
+        sort(tempArray);
+        return binarySearch(tempArray, item);
     }
 
     @Override
@@ -188,8 +191,8 @@ public class IntegerArrayList implements IntegerList {
     }
 
     @Override
-    public void sort(){
-        selectiveSort(integerData);
+    public void sort(Integer[] arr) {
+        mergeSort(arr);
     }
 
     private void indexChecker(int index) {
@@ -242,5 +245,47 @@ public class IntegerArrayList implements IntegerList {
             }
         }
         return false;
+    }
+
+    public static void mergeSort(Integer[] arr) {
+        if (arr.length < 2) {
+            return;
+        }
+        int mid = arr.length / 2;
+        Integer[] left = new Integer[mid];
+        Integer[] right = new Integer[arr.length - mid];
+
+        for (int i = 0; i < left.length; i++) {
+            left[i] = arr[i];
+        }
+
+        for (int i = 0; i < right.length; i++) {
+            right[i] = arr[mid + i];
+        }
+
+        mergeSort(left);
+        mergeSort(right);
+
+        merge(arr, left, right);
+    }
+
+    public static void merge(Integer[] arr, Integer[] left, Integer[] right) {
+
+        int mainP = 0;
+        int leftP = 0;
+        int rightP = 0;
+        while (leftP < left.length && rightP < right.length) {
+            if (left[leftP] <= right[rightP]) {
+                arr[mainP++] = left[leftP++];
+            } else {
+                arr[mainP++] = right[rightP++];
+            }
+        }
+        while (leftP < left.length) {
+            arr[mainP++] = left[leftP++];
+        }
+        while (rightP < right.length) {
+            arr[mainP++] = right[rightP++];
+        }
     }
 }
